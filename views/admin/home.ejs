@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Portal | SkillForge Academy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #0d6efd, #6610f2);
+      color: #fff;
+    }
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .btn-custom {
+      border-radius: 30px;
+      padding: 10px 25px;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-dark bg-transparent position-absolute w-100">
+  <div class="container">
+     <a class="navbar-brand fw-bold" href="#">
+      <img src="logo.png" alt="Logo" class="img-fluid " style="height: 40px;">
+        <span class="ms-2" style="text-decoration: underline; text-decoration-color:rgb(115, 136, 205);">VidyaSagar</span>
+        </a>
+  </div>    
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="hero-card text-center">
+
+          <h1 class="fw-bold mb-3">Welcome to Admin Portal</h1>
+          <p class="mb-4">
+            Manage students, courses, faculty, and results from one powerful system.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="d-flex justify-content-center gap-3 mb-5">
+            <a href="admin/admin_login" class="btn btn-light btn-custom fw-semibold">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Admin Login
+            </a>
+
+          </div>
+
+          <!-- Features -->
+          <div class="row g-4 text-start">
+            <div class="col-md-4">
+              <div>
+                <i class="bi bi-people feature-icon"></i>
+                <h6 class="fw-semibold">Student Management</h6>
+                <p class="small">Enroll, track & manage students easily.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div>
+                <i class="bi bi-journal-bookmark feature-icon"></i>
+                <h6 class="fw-semibold">Course Control</h6>
+                <p class="small">Add, update & organize all courses.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div>
+                <i class="bi bi-bar-chart-line feature-icon"></i>
+                <h6 class="fw-semibold">Reports & Analytics</h6>
+                <p class="small">Track performance and growth metrics.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center small py-3">
+  © <%= new Date().getFullYear() %> VidyaSagar Academy | Admin System
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

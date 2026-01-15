@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaSagar</title>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+    <%- include('navbar.ejs') %>
+   <section class="py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h1 class="fw-bold">Results & Achievements</h1>
+    <p class="lead mb-0">
+      Consistent results in CET, JEE & NEET over the years
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Our Performance at a Glance
+    </h2>
+
+<div class="row g-4 text-center">
+
+  <% counters.forEach(c => { if (c.status == 1) { %>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="p-4 border rounded h-100">
+
+        <h1 class="fw-bold text-<%= c.color %> counter"
+            data-target="<%= c.value %>">
+          0<%= c.suffix %>
+        </h1>
+
+        <h6 class="fw-semibold"><%= c.title %></h6>
+
+        <p class="text-muted small">
+          <%= c.description %>
+        </p>
+
+      </div>
+    </div>
+
+  <% } }) %>
+
+</div>
+
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Our Top Performers
+    </h2>
+
+<div class="row g-4">
+
+  <% if (toppers.length === 0) { %>
+    <div class="col-12 text-center text-muted">
+      <h5>No toppers available</h5>
+    </div>
+  <% } %>
+
+  <% toppers.forEach(t => { %>
+    <% if (t.status == 1) { %>   <!-- show only active -->
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center">
+
+          <img src="/uploads/<%= t.photo %>"
+               class="card-img-top"
+               alt="<%= t.student_name %>">
+
+          <div class="card-body">
+            <h5 class="fw-bold mb-1"><%= t.student_name %></h5>
+
+            <p class="text-muted mb-1">
+              <%= t.exam_name %> <%= t.exam_year %>
+            </p>
+
+            <span class="badge 
+              <%= t.badge_type === 'success' ? 'bg-success' :
+                  t.badge_type === 'primary' ? 'bg-primary' :
+                  'bg-warning text-dark' %>">
+              <%= t.achievement %>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+    <% } %>
+  <% }) %>
+
+</div>
+
+
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Exam-Wise Achievements
+    </h2>
+
+<div class="row g-4">
+  <% achievements.forEach(a => { %>
+    <% if (a.status == 1) { %>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-primary">
+          <div class="card-body">
+            <h4 class="fw-bold text-primary text-center"><%= a.exam_name %></h4>
+            <hr class="text-dark">
+            <ul class="list-group list-group-flush mt-3">
+              <li class="list-group-item">✔ <%= a.point_1 %></li>
+              <% if (a.point_2) { %>
+                <li class="list-group-item">✔ <%= a.point_2 %></li>
+              <% } %>
+              <% if (a.point_3) { %>
+                <li class="list-group-item">✔ <%= a.point_3 %></li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    <% } %>
+  <% }) %>
+</div>
+
+
+  </div>
+</section>
+<!-- <section class="py-5">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Year-Wise Result Highlights
+    </h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle text-center">
+
+        <thead class="table-primary">
+          <tr>
+            <th>Year</th>
+            <th>Exam</th>
+            <th>Student Name</th>
+            <th>Rank / Score</th>
+            <th>College / Remark</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>2025</td>
+            <td>JEE Advanced</td>
+            <td>Rahul Patil</td>
+            <td>AIR 312</td>
+            <td>IIT Bombay</td>
+          </tr>
+
+          <tr>
+            <td>2025</td>
+            <td>NEET</td>
+            <td>Sneha Deshmukh</td>
+            <td>685 Marks</td>
+            <td>Govt Medical College</td>
+          </tr>
+
+          <tr>
+            <td>2024</td>
+            <td>MHT-CET</td>
+            <td>Amit Kulkarni</td>
+            <td>99.72 %ile</td>
+            <td>COEP Pune</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</section> -->
+
+<!-- <section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold">Be the Next Success Story</h2>
+    <p class="lead">
+      Join MK Academy and achieve your dream rank
+    </p>
+    <a href="contact.html" class="btn btn-warning btn-lg fw-bold">
+      Enroll Now
+    </a>
+  </div>
+</section> -->
+
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Why Our Students Achieve Success
+    </h2>
+
+        <div class="row g-4 text-center">
+  <% factors.forEach(f => { %>
+    <% if (f.status == 1) { %>
+
+      <div class="col-md-3">
+        <div class="p-4 border rounded h-100">
+          <h5 class="fw-bold"><%= f.title %></h5>
+          <p class="text-muted small">
+            <%= f.description %>
+          </p>
+        </div>
+      </div>
+
+    <% } %>
+  <% }) %>
+</div>
+
+  </div>
+</section>
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold">Your Name Can Be Here Next</h2>
+    <p class="lead">
+      Join VidyaSagar Academy and be part of our success journey
+    </p>
+    <a class="btn btn-warning btn-lg fw-bold" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Enroll Now
+    </a>
+  </div>
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enroll Course</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- <form onsubmit="sendWhatsApp(event)"> -->
+
+
+      <!-- Modal Body -->
+      <form action="/enroll-course" method="post">
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="fullname" required>
+          </div>
+
+          <div class="mb-3">
+          	<label class="form-label">Select Course</label>
+          	<select class="form-control">
+          		<option>Select Course</option>
+          		<option>CET</option>
+          		<option>NEET</option>
+          		<option>JEE</option>
+          	</select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" name="mobile" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3" name="message"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+</section>
+
+    <%- include('footer.ejs') %>
+
+    <script>
+  const counters = document.querySelectorAll(".counter");
+
+  const animateCounter = (counter) => {
+    const target = +counter.dataset.target;
+    const suffix = counter.dataset.suffix || "+";
+    let count = 0;
+
+    const speed = 200; // higher = slower
+    const increment = target / speed;
+
+    const update = () => {
+      count += increment;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count);
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target + suffix;
+      }
+    };
+
+    update();
+  };
+
+  // Run only when visible
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+
+</body>
+</html>

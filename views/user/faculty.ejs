@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaSagar</title>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+    <%- include ('navbar.ejs') %>
+    <section class="py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h1 class="fw-bold">Our Faculty</h1>
+    <p class="lead mb-0">
+      Learn from experienced & dedicated educators
+    </p>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">Meet Our Expert Teachers</h2>
+    <p class="text-muted">
+      Our faculty members are highly qualified and experienced in guiding
+      students for CET, JEE & NEET examinations with result-oriented teaching.
+    </p>
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+
+ <div class="row g-4">
+
+  <% if (faculty && faculty.length > 0) { %>
+    <% faculty.forEach(f => { %>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm text-center">
+
+          <img src="<%= f.image ? '/uploads/' + f.image : 'py_teacher.png' %>"
+               class="card-img-top h-75 "
+               alt="Faculty">
+
+          <div class="card-body">
+            <h5 class="fw-bold mb-1"><%= f.faculty_name %></h5>
+            <p class="text-muted mb-1"><%= f.subject %></p>
+
+            <span class="badge 
+              <%= f.subject === 'Physics' ? 'bg-primary' :
+                  f.subject === 'Chemistry' ? 'bg-success' :
+                  f.subject === 'Mathematics' ? 'bg-warning text-dark' :
+                  'bg-danger' %>">
+              <%= f.experience %>
+            </span>
+
+          </div>
+        </div>
+      </div>
+
+    <% }) %>
+  <% } %>
+
+</div>
+
+
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-4">
+      Our Teaching Strength
+    </h2>
+
+    <div class="row g-4 text-center">
+
+      <div class="col-md-3">
+        <div class="p-4 border rounded">
+          <h5 class="fw-bold text-primary">Physics</h5>
+          <p class="text-muted small">
+            Concept clarity & numerical problem solving
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 border rounded">
+          <h5 class="fw-bold text-success">Chemistry</h5>
+          <p class="text-muted small">
+            Organic, Inorganic & Physical expertise
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 border rounded">
+          <h5 class="fw-bold text-warning">Mathematics</h5>
+          <p class="text-muted small">
+            Logic building & speed techniques
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="p-4 border rounded">
+          <h5 class="fw-bold text-danger">Biology</h5>
+          <p class="text-muted small">
+            NCERT focused & exam-oriented teaching
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- <section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2 class="fw-bold">
+      Learn From the Best Faculty Team
+    </h2>
+    <p class="lead mt-2">
+      Join MK Academy and experience expert guidance for CET, JEE & NEET
+    </p>
+    <a href="/contact" class="btn btn-warning btn-lg fw-bold mt-3">
+      Enquire Now
+    </a>
+  </div>
+</section> -->
+
+
+    <%- include ('footer.ejs') %>
+</body>
+</html>

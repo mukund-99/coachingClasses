@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaSagar</title>
+    <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+    <%- include('navbar.ejs') %>
+    
+    <section class="py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h1 class="fw-bold">Batch & Timetable</h1>
+    <p class="lead mb-0">
+      Choose the batch that fits your schedule
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3 mt-5">Available Batches</h2>
+    <p class="text-muted">
+      We offer flexible batch timings for CET, JEE & NEET students
+      in both online and offline modes.
+    </p>
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+
+
+ <div class="row g-4 justify-content-center">
+
+  <% courses.forEach(course => { %>
+    <div class="col-md-4">
+      <div class="card h-100 shadow text-center border-primary">
+
+        <div class="card-header bg-primary text-white">
+          <h3 class="fw-bold mb-0"><%= course.course_title %></h3>
+          <small><%= course.category %></small>
+        </div>
+
+        <div class="card-body">
+          <h2 class="fw-bold text-success">
+            ₹<%= course.price.toLocaleString() %>
+          </h2>
+          <p class="text-muted"><%= course.price_label %></p>
+
+          <ul class="list-group list-group-flush text-start my-3">
+            <li class="list-group-item">✔ Duration: <%= course.duration %></li>
+            <li class="list-group-item">✔ Mode: <%= course.mode %></li>
+
+            <% course.features.split(',').forEach(f => { %>
+              <li class="list-group-item">✔ <%= f %></li>
+            <% }) %>
+          </ul>
+
+          <a class="btn btn-outline-primary w-100"
+             data-bs-toggle="modal"
+             data-bs-target="#exampleModal">
+            Enroll Now
+          </a>
+        </div>
+
+      </div>
+    </div>
+  <% }) %>
+
+</div>
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enroll Course</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- <form onsubmit="sendWhatsApp(event)"> -->
+
+
+      <!-- Modal Body -->
+      <form action="/enroll-course" method="post">
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="fullname" required>
+          </div>
+
+          <div class="mb-3">
+          	<label class="form-label">Select Course</label>
+          	<select class="form-control">
+          		<option>Select Course</option>
+          		<option>CET</option>
+          		<option>NEET</option>
+          		<option>JEE</option>
+          	</select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" name="mobile" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3" name="message"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <div class="table-responsive">
+<table class="table table-bordered table-hover align-middle text-center">
+
+  <thead class="table-primary">
+    <tr>
+      <th>Batch Name</th>
+      <th>Course</th>
+      <th>Start Date</th>
+      <th>Class Timing</th>
+      <th>Mode</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if (batches.length === 0) { %>
+      <tr>
+        <td colspan="5" class="text-muted">No batches available</td>
+      </tr>
+    <% } %>
+
+    <% batches.forEach(batch => { %>
+      <tr>
+        <td><%= batch.batch_name %></td>
+        <td><%= batch.course_name %></td>
+
+        <td>
+          <%= new Date(batch.start_date).toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+              }) %>
+        </td>
+
+        <td><%= batch.class_timing %></td>
+
+        <td>
+          <% if (batch.mode === 'Online') { %>
+            <span class="badge bg-info text-dark">Online</span>
+          <% } else { %>
+            <span class="badge bg-success">Offline</span>
+          <% } %>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+
+</table>
+
+    </div>
+
+  </div>
+</section>
+<section class="py-5 text-center bg-primary text-white">
+  <div class="container">
+    <h2 class="fw-bold">Not Sure Which Batch to Choose?</h2>
+    <p class="mb-4">
+      Get guidance from our counselors to select the best batch for you
+    </p>
+    <a class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#counselingModal">
+      Get Free Counseling
+    </a>
+  </div>
+
+  <div class="modal fade" id="counselingModal" tabindex="-1" aria-labelledby="counselingLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="counselingLabel">For Counseling</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- <form onsubmit="sendWhatsApp(event)"> -->
+
+
+      <!-- Modal Body -->
+      <form action="/counseling" method="post">
+        <div class="modal-body text-dark text-start">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="fullname" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" name="mobile" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date & Time</label>
+            <input type="datetime-local" class="form-control" name="datetime" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3" name="message"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+</section>
+
+    <%- include('footer.ejs') %>
+</body>
+</html>

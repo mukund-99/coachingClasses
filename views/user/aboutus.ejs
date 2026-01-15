@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaSagar</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <%- include ('navbar') %>
+    <section class="py-5 bg-primary text-white">
+  <div class="container text-center">
+    <h1 class="fw-bold">About Us</h1>
+    <p class="mb-0">Know more about MK Academy</p>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+   <% for (let i = 0; i < history.length; i++) { %>
+
+  <div class="row align-items-center mb-5">
+
+    <div class="col-md-6 <%= i % 2 !== 0 ? 'order-md-2' : '' %>">
+      <h2 class="fw-bold mb-3"><%= history[i].title %></h2>
+      <p class="text-muted"><%= history[i].description_1 %></p>
+      <p class="text-muted"><%= history[i].description_2 %></p>
+    </div>
+
+    <div class="col-md-6 <%= i % 2 !== 0 ? 'order-md-1' : '' %>">
+      <img src="/uploads/<%= history[i].image %>"
+           class="img-fluid rounded shadow-sm h-100 w-100">
+    </div>
+
+  </div>
+
+<% } %>
+
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-md-5 border m-5 p-5 rounded shadow-sm bg-white">
+        <div class="vision-mission-card vision-card">
+          <div class="icon mb-4">
+            <i class="fas fa-eye fa-3x text-primary"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Our Vision</h3>
+          <p class="text-muted fs-5">
+            "To be a global leader in education, fostering innovation, critical thinking, and ethical leadership to create a positive impact on society."
+          </p>
+        </div>
+      </div>
+      <div class="col-md-5 border m-5 p-5 rounded shadow-sm bg-white">
+        <div class="vision-mission-card mission-card">
+          <div class="icon mb-4">
+            <i class="fas fa-bullseye fa-3x text-secondary"></i> 
+            <style> .text-custom-purple { color: #7C3AED; } </style>
+          </div>
+          <h3 class="fw-bold mb-3">Our Mission</h3>
+          <p class="text-muted fs-5">
+            "To provide world-class education that empowers students to achieve their full potential, 
+            fostering a culture of research, innovation, and inclusivity."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+<section class="py-5">
+  <div class="container">
+
+    <% director.forEach(d => { %>
+      <div class="row align-items-center">
+
+        <div class="col-md-4 text-center">
+          <img src="/uploads/<%= d.image %>"
+               class="img-fluid border border-dark rounded shadow-sm"
+               alt="Director">
+        </div>
+
+        <div class="col-md-8 mt-3">
+          <h3 class="fw-bold">Director’s Message</h3>
+
+          <p class="text-muted">
+            <%= d.message_1 %>
+          </p>
+
+          <% if (d.message_2) { %>
+            <p class="text-muted">
+              <%= d.message_2 %>
+            </p>
+          <% } %>
+
+          <h6 class="fw-bold mt-4"><%= d.name %></h6>
+          <p class="text-muted"><%= d.designation %></p>
+        </div>
+
+      </div>
+    <% }) %>
+
+  </div>
+</section>
+
+  </div>
+</section>
+
+<!-- <section class="py-5 bg-light">
+  <div class="container text-center">
+
+    <h2 class="fw-bold mb-4">Highlights</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="fw-bold">Physics Department</h5>
+            <p class="text-muted small">
+              More than 4 successful years in the field of education.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="fw-bold">Chemistry Department</h5>
+            <p class="text-muted small">
+              Concept-oriented teaching with exam-focused approach
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="fw-bold">Mathematics & Biology</h5>
+            <p class="text-muted small">
+              Strong fundamentals and problem-solving techniques
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="faculty.html" class="btn btn-outline-primary mt-4">
+      View Full Faculty
+    </a>
+
+  </div>
+</section> -->
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+      <h6 class="text-primary fw-bold text-uppercase">
+        Our Strengths
+      </h6>
+      <h2 class="fw-bold">
+        What Makes VidyaSagar Academy Different
+      </h2>
+      <p class="text-muted">
+        Key highlights that define our success and student achievements
+      </p>
+    </div>
+
+    <!-- Highlights -->
+  
+
+<div class="row g-4 text-center">
+
+  <% counters.forEach(c => { if (c.status == 1) { %>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="p-4 border rounded h-100">
+
+        <h1 class="fw-bold text-<%= c.color %> counter"
+            data-target="<%= c.value %>">
+          0<%= c.suffix %>
+        </h1>
+
+        <h6 class="fw-semibold"><%= c.title %></h6>
+
+        <p class="text-muted small">
+          <%= c.description %>
+        </p>
+
+      </div>
+    </div>
+
+  <% } }) %>
+
+</div>
+</section>
+
+<%- include ('footer.ejs') %>
+
+<script>
+  const counters = document.querySelectorAll(".counter");
+
+  const animateCounter = (counter) => {
+    const target = +counter.dataset.target;
+    const suffix = counter.dataset.suffix || "+";
+    let count = 0;
+
+    const speed = 100; // higher = slower
+    const increment = target / speed;
+
+    const update = () => {
+      count += increment;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count);
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target + suffix;
+      }
+    };
+
+    update();
+  };
+
+  // Run only when visible
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel | VidyaSagar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4a6cf7;
+      --primary-dark: #3a5ce5;
+      --secondary: #6c757d;
+      --success: #28a745;
+      --info: #17a2b8;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --sidebar-width: 260px;
+      --sidebar-bg: linear-gradient(180deg, #1a237e 0%, #283593 100%);
+      --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+   
+    
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      background: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .header-title h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 0.25rem;
+      color: var(--dark);
+    }
+    
+    .header-title p {
+      color: var(--secondary);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+    
+    .header-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .notification-icon {
+      position: relative;
+      margin-right: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--secondary);
+      cursor: pointer;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--danger);
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+      background: rgba(74, 108, 247, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+    
+    .user-profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    
+    .user-info h5 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    
+    .user-info p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--secondary);
+    }
+    
+    /* Stats Cards */
+    .stats-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary);
+      height: 100%;
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stats-card.students {
+      border-top-color: #4a6cf7;
+    }
+    
+    .stats-card.courses {
+      border-top-color: #28a745;
+    }
+    
+    .stats-card.faculty {
+      border-top-color: #ffc107;
+    }
+    
+    .stats-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+    
+    .stats-card.students .stats-icon {
+      background: rgba(74, 108, 247, 0.1);
+      color: var(--primary);
+    }
+    
+    .stats-card.courses .stats-icon {
+      background: rgba(40, 167, 69, 0.1);
+      color: var(--success);
+    }
+    
+    .stats-card.faculty .stats-icon {
+      background: rgba(255, 193, 7, 0.1);
+      color: var(--warning);
+    }
+    
+    .stats-content h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stats-content p {
+      color: var(--secondary);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stats-change {
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    
+    .stats-change.positive {
+      color: var(--success);
+    }
+    
+    .stats-change.negative {
+      color: var(--danger);
+    }
+    
+    /* Recent Activity */
+    .recent-activity {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      margin-top: 1.5rem;
+    }
+    
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .activity-icon.student {
+      background: rgba(74, 108, 247, 0.1);
+      color: var(--primary);
+    }
+    
+    .activity-icon.course {
+      background: rgba(40, 167, 69, 0.1);
+      color: var(--success);
+    }
+    
+    .activity-icon.faculty {
+      background: rgba(255, 193, 7, 0.1);
+      color: var(--warning);
+    }
+    
+    .activity-content h6 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .activity-content p {
+      color: var(--secondary);
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    
+    .activity-time {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: var(--secondary);
+    }
+    
+    /* Quick Actions */
+    .quick-actions {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      margin-top: 1.5rem;
+    }
+    
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: none;
+      transition: var(--transition);
+      color: var(--dark);
+      text-decoration: none;
+    }
+    
+    .action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .action-btn i {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .action-btn span {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    
+    /* Mobile Toggle */
+    .mobile-toggle {
+      display: none;
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-right: 1rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.mobile-open {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .mobile-toggle {
+        display: flex;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .header-actions {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .action-buttons {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+   <%- include('nav') %>
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <header class="header fade-in">
+     <h6>History</h6>
+     <button class="btn btn-sm btn-primary" onclick="(window.print())">Print</button>
+    </header>
+
+    <!-- Stats Cards -->
+    <div class="row fade-in">
+      <div class="col-md-12">
+        <div class="stats-card">
+           <div class="row g-4">
+
+  <% for (let i = 0; i < data.length; i++) { %>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <input type="hidden" value="<%= data[i].history_id %>" name="id">
+        <div class="card-header p-0">
+          <img 
+            src="/uploads/<%= data[i].image %>" 
+            class="img-fluid rounded-top h-100 w-100"
+            alt="Image">
+        </div>
+
+        <div class="card-body">
+          <h4 class="text-center">
+             <% if (data[i].status == 1) { %>
+                <span class="badge bg-success"></span>
+              <% } else { %>
+                <span class="badge bg-danger">Inactive</span>
+              <% } %>
+          </h3>
+          <h5 class="fw-bold">
+            <%= data[i].title || 'No Title' %>
+          </h5>
+
+          <p class="text-muted small">
+            <%= data[i].description_1 || '' %>
+          </p>
+          <p class="text-muted small">
+            <%= data[i].description_2 || '' %>
+          </p>
+          <a href="/admin/history_edit/<%= data[i].history_id %>" class="btn btn-sm btn-primary">Edit</a>
+          <a href="/admin/history_delete/<%= data[i].history_id %>" class="btn btn-sm float-sm btn-danger" onclick="alert('Are You Sure For Delete')">Delete</a>
+        </div>
+
+      </div>
+    </div>
+  <% } %>
+
+</div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidyaSagar</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>  
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <%- include('navbar') %>
+    <section class="py-5   text-white" style="background-image: url('hero_bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="container text-center">
+
+    <h2 class="fw-bold mb-3 p-3">
+      Start Your Success Journey Today
+    </h2>
+
+    <p class="lead mb-4 ">
+      Join VidyaSagar Academy for CET, JEE & NEET coaching with proven results
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap p-4">
+      <a class="btn btn-warning btn-lg fw-bold" data-bs-toggle="modal" data-bs-target="#homeEnrollModal">
+        Enroll Now
+      </a>
+
+   <!-- Modal -->
+<div class="modal fade" id="homeEnrollModal" tabindex="-1" aria-labelledby="homeEnrollModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header  bg-primary text-white">
+        <h5 class="modal-title" id="homeEnrollModalLabel">Enroll Course</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- <form onsubmit="sendWhatsApp(event)"> -->
+
+
+      <!-- Modal Body -->
+      <form action="/enroll-course" method="post">
+        <div class="modal-body text-start text-dark ">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="fullname" required>
+          </div>
+
+          <div class="mb-3">
+          	<label class="form-label">Select Course</label>
+          	<select class="form-control" name="course" required>
+          		<option disabled>Select Course</option>
+          		<option value="CET">CET</option>
+          		<option value="NEET">NEET</option>
+          		<option value="JEE">JEE</option>
+          	</select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" name="mobile" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3" name="message"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+      <a href="/courses" class="btn btn-outline-light btn-lg">
+        View Courses
+      </a>
+    </div>
+
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- Left Content -->
+      <div class="col-md-6">
+        <h4 class="text-primary fw-bold text-uppercase">
+          About Us
+        </h4>
+
+        <!-- <h2 class="fw-bold mt-2">
+          Building Strong Foundations for CET, JEE & NEET
+        </h2> -->
+
+        <p class="text-muted mt-3">
+          VidyaSagar Academy is a trusted coaching institute dedicated to preparing
+          students for competitive exams like CET, JEE and NEET. With expert
+          faculty, structured study plans and regular testing, we help students
+          achieve their academic goals with confidence.
+        </p>
+
+        <ul class="mt-3" type="none">
+          <!-- <li>✔ 10+ years of teaching experience</li> -->
+          <li>✔ Concept-based learning approach</li>
+          <li>✔ Regular tests & performance analysis</li>
+          <li>✔ Personal mentorship for every student</li>
+        </ul>
+
+        <a href="/about-us" class="btn btn-primary mt-4">
+          Read More About Us
+        </a>
+      </div>
+      
+      <!-- Right Image -->
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div style="position: relative; height: 400px; overflow: visible;" class="d-none d-md-inline-block">
+        <img
+          src="about_us.png"
+          class="img-fluid "
+          style="
+              height: 100%;
+              width: 100%;
+              position: relative;
+              right: 70px;
+              object-fit: cover;
+              mix-blend-mode: multiply;
+              border-radius: 20px;
+              /* clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%); */
+              transform: perspective(1000px) rotateY(-5deg);
+              filter: 
+                  drop-shadow(5px 5px 30px rgba(13, 110, 253, 0.2))
+                  drop-shadow(15px 15px 30px rgba(0, 0, 0, 0.15));
+          "
+          alt="About MK Academy"
+        >
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</section>
+
+    <section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Our Popular Courses</h2>
+      <p class="text-muted">
+        Specialized coaching for Engineering & Medical entrance exams
+      </p>
+    </div>
+
+    <!-- Courses Row -->
+<div class="row g-4">
+
+  <% courses.forEach(course => { %>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm text-center border-primary">
+        <div class="card-body">
+
+          <!-- Course Code -->
+          <h3 class="fw-bold text-primary">
+            <%= course.course_code %>
+          </h3>
+
+          <!-- Description -->
+          <p class="text-muted mt-3">
+            <%= course.description %>
+          </p>
+
+          <!-- Features -->
+          <ul class="list-group list-group-flush my-3">
+
+            <% if (course.duration) { %>
+              <li class="list-group-item">
+                ✔ Duration: <%= course.duration %>
+              </li>
+            <% } %>
+
+            <% if (course.mode) { %>
+              <li class="list-group-item">
+                ✔ Mode: <%= course.mode %>
+              </li>
+            <% } %>
+
+            <% if (course.features) { 
+                course.features.split(',').forEach(f => { %>
+                  <li class="list-group-item">
+                    ✔ <%= f.trim() %>
+                  </li>
+            <% }) } %>
+
+          </ul>
+
+          <!-- Button -->
+          <a href="/courses"
+             class="btn btn-outline-primary w-100">
+            View Details
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+  <% }) %>
+
+</div>
+
+
+  </div>
+</section>
+
+<section class="py-5 text-center bg-primary text-white">
+  <div class="container">
+    <h2 class="fw-bold">Not Sure Which Batch to Choose?</h2>
+    <p class="mb-4">
+      Get guidance from our counselors to select the best batch for you
+    </p>
+    <a class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#counselingModal">
+      Get Free Counseling
+    </a>
+  </div>
+
+  <div class="modal fade" id="counselingModal" tabindex="-1" aria-labelledby="counselingLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-warning text-white">
+        <h5 class="modal-title" id="counselingLabel">For Counseling</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- <form onsubmit="sendWhatsApp(event)"> -->
+
+
+      <!-- Modal Body -->
+      <form action="/counseling" method="post">
+        <div class="modal-body text-dark text-start">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control" name="fullname" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile Number</label>
+            <input type="tel" class="form-control" name="mobile" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Date & Time</label>
+            <input type="datetime-local" class="form-control" name="datetime" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="3" name="message"></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+</section>
+
+
+<section class="py-5">
+  <div class="container">
+
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Why Choose VidyaSagar Academy?</h2>
+      <p class="text-muted">
+        We focus on results, concepts, and student success
+      </p>
+    </div>
+
+    <!-- Features Row -->
+<div class="row g-4 text-center">
+
+  <% counters.forEach(c => { if (c.status == 1) { %>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="p-4 border rounded h-100">
+
+        <h1 class="fw-bold text-<%= c.color %> counter"
+            data-target="<%= c.value %>"
+            data-suffix="<%= c.suffix %>"> 0
+        </h1>
+
+        <h6 class="fw-semibold"><%= c.title %></h6>
+
+        <p class="text-muted small">
+          <%= c.description %>
+        </p>
+
+      </div>
+    </div>
+
+  <% } }) %>
+
+</div>
+
+
+    <!-- CTA -->
+    <!-- <div class="text-center mt-5">
+      <a href="contact.html" class="btn btn-primary btn-lg">
+        Join MK Academy Today
+      </a>
+    </div> -->
+
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+      <h4 class="text-primary fw-bold text-uppercase">
+        Our Faculty
+      </h4>
+      <!-- <h2 class="fw-bold">
+        Learn from Experienced Subject Experts
+      </h2> -->
+      <p class="text-muted">
+        Dedicated teachers with years of coaching experience
+      </p>
+    </div>
+
+    <!-- Faculty Cards -->
+  <div class="row g-4">
+
+  <% if (!faculty || faculty.length === 0) { %>
+    <div class="col-12 text-center text-muted">
+      No faculty available
+    </div>
+  <% } else { %>
+
+    <% faculty.forEach(f => { %>
+      <div class="col-md-3 col-sm-6 ">
+        <div class="card h-100 shadow-sm text-center">
+
+          <img 
+            src="<%= f.image ? '/uploads/' + f.image : '/images/default-teacher.png' %>" 
+            class="card-img-top w-100 h-100"
+            alt="<%= f.subject %> Faculty">
+
+          <div class="card-body">
+            <h5 class="fw-bold"><%= f.faculty_name %></h5>
+            <p class="text-primary mb-1"><%= f.subject %></p>
+            <p class="text-muted small">
+              <%= f.experience %>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    <% }) %>
+
+  <% } %>
+
+</div>
+
+
+    <!-- Button -->
+    <div class="text-center mt-5">
+      <a href="/faculty" class="btn btn-outline-primary">
+        View Full Faculty Team
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+      <h6 class="text-primary fw-bold text-uppercase">
+        Batches & Timetable
+      </h6>
+      <h2 class="fw-bold">
+        Flexible Batches for Every Student
+      </h2>
+      <!-- <p class="text-muted">
+        Choose a batch that fits your schedule
+      </p> -->
+    </div>
+
+    <!-- Batch Cards -->
+<div class="row g-4">
+
+  <% if (batches.length === 0) { %>
+    <div class="col-12 text-center text-muted">
+      <h5>No batches available</h5>
+    </div>
+  <% } %>
+
+  <% batches.forEach(batch => { %>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm border-primary">
+        <div class="card-body text-start">
+
+          <!-- Batch Name -->
+          <h4 class="fw-bold text-primary ">
+            <%= batch.batch_name %>
+          </h4>
+
+          <ul type="none" class="mt-3">
+            <!-- Timing -->
+            <li>
+              ✔ Time: <%= batch.class_timing %>
+            </li>
+
+            <!-- Course -->
+            <li>
+              ✔ <%= batch.course_name %>
+            </li>
+
+            <!-- Start Date -->
+            <li>
+              ✔ Starts On:
+              <%= new Date(batch.start_date).toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                  }) %>
+            </li>
+
+            <!-- Mode -->
+            <li>
+              ✔ Mode:
+              <span class=" 
+                <%= batch.mode === 'Online' ? 'bg-info text-dark' : '' %>">
+                <%= batch.mode %>
+              </span>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+  <% }) %>
+
+</div>
+
+
+    <!-- Extra Info -->
+    <div class="row mt-5 text-center">
+      <div class="col-md-4 ">
+        <div class="p-3 bg-body-secondary border rounded">
+          ✔ Online & Offline Batches Available
+        </div>
+      </div>
+      <div class="col-md-4 ">
+        <div class="p-3 bg-body-secondary border rounded">
+          ✔ Limited Students Per Batch
+        </div>
+      </div>
+      <div class="col-md-4 ">
+        <div class="p-3 bg-body-secondary border rounded">
+          ✔ Regular Doubt Sessions
+        </div>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="text-center mt-5">
+      <a href="/batches" class="btn btn-outline-primary">
+        View Full Timetable
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Our Results Speak</h2>
+      <p class="text-muted">
+        Outstanding performance in CET, JEE & NEET exams
+      </p>
+    </div>
+
+    <!-- Results Row -->
+<div class="row g-4">
+
+  <% if (toppers.length === 0) { %>
+    <div class="col-12 text-center text-muted">
+      <h5>No toppers available</h5>
+    </div>
+  <% } %>
+
+  <% toppers.forEach(t => { %>
+    <% if (t.status == 1) { %>   <!-- show only active -->
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center">
+
+          <img src="/uploads/<%= t.photo %>"
+               class="card-img-top"
+               alt="<%= t.student_name %>">
+
+          <div class="card-body">
+            <h5 class="fw-bold mb-1"><%= t.student_name %></h5>
+
+            <p class="text-muted mb-1">
+              <%= t.exam_name %> <%= t.exam_year %>
+            </p>
+
+            <span class="badge 
+              <%= t.badge_type === 'success' ? 'bg-success' :
+                  t.badge_type === 'primary' ? 'bg-primary' :
+                  'bg-warning text-dark' %>">
+              <%= t.achievement %>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+    <% } %>
+  <% }) %>
+
+</div>
+
+    <!-- View More Button -->
+    <div class="text-center mt-5">
+      <a href="/achievements" class="btn btn-outline-primary btn-lg">
+        View All Results
+      </a>
+    </div>
+
+  </div>
+</section>
+<!-- <section class="py-5">
+  <div class="container"> -->
+
+    <!-- Section Heading -->
+    <!-- <div class="text-center mb-5">
+      <h2 class="fw-bold">Meet Our Expert Faculty</h2>
+      <p class="text-muted">
+        Learn from experienced & dedicated educators
+      </p>
+    </div> -->
+
+    <!-- Faculty Cards -->
+    <!-- <div class="row g-4">
+
+      <!-- Faculty 1 -->
+      <!-- <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x300"
+               class="card-img-top"
+               alt="Faculty">
+          <div class="card-body">
+            <h5 class="fw-bold mb-1">Prof. A. Sharma</h5>
+            <p class="text-muted mb-1">Physics</p>
+            <span class="badge bg-primary">12+ Years</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Faculty 2 -->
+      <!-- <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x300"
+               class="card-img-top"
+               alt="Faculty">
+          <div class="card-body">
+            <h5 class="fw-bold mb-1">Dr. S. Patil</h5>
+            <p class="text-muted mb-1">Chemistry</p>
+            <span class="badge bg-success">10+ Years</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Faculty 3 -->
+      <!-- <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x300"
+               class="card-img-top"
+               alt="Faculty">
+          <div class="card-body">
+            <h5 class="fw-bold mb-1">Mr. R. Deshmukh</h5>
+            <p class="text-muted mb-1">Mathematics</p>
+            <span class="badge bg-warning text-dark">15+ Years</span>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Faculty 4 -->
+      <!-- <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm text-center">
+          <img src="https://via.placeholder.com/300x300"
+               class="card-img-top"
+               alt="Faculty">
+          <div class="card-body">
+            <h5 class="fw-bold mb-1">Dr. N. Kulkarni</h5>
+            <p class="text-muted mb-1">Biology</p>
+            <span class="badge bg-danger">8+ Years</span>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+    <!-- CTA -->
+    <!-- <div class="text-center mt-5">
+      <a href="faculty.html" class="btn btn-outline-primary btn-lg">
+        View All Faculty
+      </a>
+    </div> -->
+
+  <!-- </div>
+</section>  -->
+
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">What Our Students Say</h2>
+      <p class="text-muted">
+        Success stories from CET, JEE & NEET achievers
+      </p>
+    </div>
+
+    <!-- Testimonials Row -->
+    <div class="row g-4">
+
+      <!-- Testimonial 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <p class="text-muted">
+              “MK Academy helped me crack JEE with strong concepts and regular tests.
+              Faculty support was excellent.”
+            </p>
+            <hr>
+            <h6 class="fw-bold mb-0">Rahul Patil</h6>
+            <small class="text-muted">JEE Advanced Student</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <p class="text-muted">
+              “Best coaching for NEET! Biology teaching and doubt sessions were
+              very helpful.”
+            </p>
+            <hr>
+            <h6 class="fw-bold mb-0">Sneha Deshmukh</h6>
+            <small class="text-muted">NEET Qualifier</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <p class="text-muted">
+              “Regular mock tests and guidance helped me score 99+ percentile
+              in MHT-CET.”
+            </p>
+            <hr>
+            <h6 class="fw-bold mb-0">Amit Kulkarni</h6>
+            <small class="text-muted">MHT-CET Topper</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-5  get-touch-me text-white" style="background-image: url('contact_us.jpg'); background-position: fit; background-size: cover; background-repeat: no-repeat;">
+  <div class="container">
+
+    <div class="row align-items-center">
+
+      <!-- Left Content -->
+      <div class="col-md-12 mb-4 mb-md-0 text-center">
+        <h2 class="fw-bold">
+          Get In Touch With VidyaSagar Academy
+        </h2>
+        <p class="lead mt-3">
+          Have questions about courses, batches or admissions?  
+          Our team is ready to guide you.
+        </p>
+
+        <ul class="mt-4" type="none">
+          <li>✔ CET • JEE • NEET Expert Guidance</li>
+          <li>✔ Admission Counseling</li>
+          <li>✔ Online & Offline Support</li>
+        </ul>
+      </div>
+
+      <!-- Right CTA -->
+       <div class="row  mt-4 fw-bold">
+       <div class="col-md-12 d-flex justify-content-center text-center">
+        <div class=" text-dark p-4  border rounded p-4 shadow  w-md-50">
+          <h4 class="fw-bold text-white">Contact Us Today</h4>
+
+          <p class="mt-3 mb-2 text-white">
+            📞 <strong>Call:</strong> +91 98765 43210
+          </p>
+          <p class="mb-3 text-white">
+            📍 <strong>Visit:</strong> Pune, Maharashtra
+          </p>
+
+          <a href="/contact" class="btn text-white btn-primary w-md-25 fw-bold">
+            Enquire Now
+          </a>
+        </div>
+      </div>
+      </div>
+     
+
+    </div>
+
+  </div>
+</section>
+
+<%- include('footer.ejs') %>
+
+<script>
+  const counters = document.querySelectorAll(".counter");
+
+  const animateCounter = (counter) => {
+    const target = Number(counter.dataset.target) || 0;
+    const suffix = counter.dataset.suffix || "";
+    let count = 0;
+
+    const speed = 100; // higher = slower
+    const increment = target / speed;
+
+    const update = () => {
+      count += increment;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count) + suffix;
+        requestAnimationFrame(update);
+      } else {
+        counter.innerText = target + suffix;
+      }
+    };
+
+    update();
+  };
+
+  // Run animation only when counter becomes visible
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target); // run once
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  counters.forEach(counter => observer.observe(counter));
+</script>
+
+
+
+</body>
+</html>
