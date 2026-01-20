@@ -24,4 +24,4 @@ require('dotenv').config();
 app.use("/", require("./routes/user"));
 app.use("/admin", require("./routes/admin"));
 
-app.listen(process.env.PORT || 1100);
+app.listen(process.env.PORT || 3000);
