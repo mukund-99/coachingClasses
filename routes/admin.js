@@ -36,20 +36,29 @@ router.post('/register-admin-process', async (req,res) => {
     res.redirect('/admin/admin_login');
 });
 
-router.post('/login-admin', (req,res) => {
+router.post('/login-admin', async (req,res) => {
     var d = req.body;
     var sql = 'SELECT * FROM admin_register WHERE admin_email = ? AND admin_password = ?';
-    exe(sql, [d.email, d.password]).then((result) => {
-        if(result.length > 0){
-            res.redirect('/admin/admin_pannel');
-        } else {
-            res.send("Invalid Email or Password. Please try again.");
-        }
-    }).catch((err) => {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
-    });
+    var admin = await exe(sql, [d.email, d.password]);
+
+    if(admin.length > 0){
+        req.session.admin_id = admin[0].admin_id;
+        res.redirect('/admin/admin_pannel');
+    } else {
+        res.send("Invalid Email or Password. Please try again.");
+    }
 });
+
+function verifyAdmin(req, res, next) {
+    if (req.session && req.session.admin_id) {
+        next();
+    } else {
+        res.redirect('/admin');
+    }
+}
+
+router.use(verifyAdmin);
+
 
 router.get('/admin_pannel', async (req, res) => {
     try {
